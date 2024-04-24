@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { postProduct } from "../Services";
 import { toast } from "react-toastify";
 const ProductForm = (props) => {
-    const { dialogProps } = props
+    const { dialogProps, setProductList, productList } = props
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
@@ -18,10 +18,12 @@ const ProductForm = (props) => {
 
         },
         onSuccess: (data, variables, context) => {
+            console.log("Dtata", data)
             queryClient.invalidateQueries({
-                queryKey: ['products'],
+                // queryKey: ['products'],
                 exact: true
             })
+            setProductList([data])
             notify()
         }
     })
@@ -31,7 +33,7 @@ const ProductForm = (props) => {
         if (!name || !description || !price) return;
 
         try {
-            await mutate({ title: name, body : description, reactions: parseFloat(price), userId: Math.floor(Math.random() * 100) });
+            await mutate({ title: name, body: description, reactions: parseFloat(price), userId: Math.floor(Math.random() * 100) });
             setName('');
             setDescription('');
             setPrice('');

@@ -1,4 +1,4 @@
-import { Button, Card, CardActionArea, CardContent, Divider, Grid, Tooltip, Typography } from "@mui/material"
+import { Box, Button, Card, CardActionArea, CardContent, Divider, Grid, Tooltip, Typography } from "@mui/material"
 import { makeStyles } from "@mui/styles"
 import { useEffect, useRef, useState } from "react"
 
@@ -34,14 +34,14 @@ const useStyle = makeStyles((theme) => ({
         overflow: 'hidden',
         textOverflow: 'ellipsis'
     },
-    readbtn:{
+    readbtn: {
         float: "right",
         fontSize: "10px !important",
-        opacity:0.9,
+        opacity: 0.9,
         border: "none important",
-        outline:'none !important',
-        '&:hover':{
-            border:"none important",
+        outline: 'none !important',
+        '&:hover': {
+            border: "none important",
         }
     }
 }))
@@ -58,38 +58,46 @@ const ProductCards = (props) => {
     const { data } = props
     const [isExpanded, setIsExpanded] = useState(false);
     const [showButton, setShowButton] = useState(false)
- 
+
     const ref = useRef(null)
 
     const toggleExpanded = () => {
         setIsExpanded(!isExpanded);
     };
-    
-    useEffect(()=>{
-         if(ref.current){
+
+    useEffect(() => {
+        if (ref.current) {
             setShowButton(ref.current.scrollHeight !== ref.current.clientHeight)
-         }
-    },[data])
-    
+        }
+    }, [data])
+
 
 
     return (
         <Card >
-                <CardContent>
-                    <Typography className={classes.title} variant="h5" component="div">
-                        {data?.title}
-                    </Typography>
-                </CardContent>
-                <Divider />
-                <CardContent>
+            <CardContent>
+                <Typography className={classes.title} variant="h5" component="div">
+                    Title : {data?.title}
+                </Typography>
+            </CardContent>
+            <Divider />
+            <CardContent>
+                <Typography className={classes.subtitle} variant="h5" component="div">
+                    Message:
+                </Typography>
+                <Typography ref={ref} style={isExpanded ? null : paraStyle} className={classes.text_msg} variant="body2" color="text.secondary">
+                    {data?.body}
+                </Typography>
+                <Box mt={2} display='flex' gap={1} justifyContent='flex-start' alignItems='center'>
                     <Typography className={classes.subtitle} variant="h5" component="div">
-                        Message:
+                        Price :
                     </Typography>
                     <Typography ref={ref} style={isExpanded ? null : paraStyle} className={classes.text_msg} variant="body2" color="text.secondary">
-                        {data?.body}
+                        {data?.reactions}
                     </Typography>
-                    {showButton && <Button  size="small" className={classes.readbtn} onClick={toggleExpanded} >{isExpanded ? "read less" : "read more..."}</Button> }  
-                    </CardContent>
+                </Box>
+                {showButton && <Button size="small" className={classes.readbtn} onClick={toggleExpanded} >{isExpanded ? "read less" : "read more..."}</Button>}
+            </CardContent>
         </Card>
 
     )

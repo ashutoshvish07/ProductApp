@@ -4,7 +4,7 @@ const API_BASE_URL = 'https://dummyjson.com/';
 
 // Fetch all products
 const fetchProducts = async () => {
-    const response = await fetch(`${API_BASE_URL}posts?limit=150`);
+    const response = await fetch(`${API_BASE_URL}posts?limit=20`);
     const data = await response.json();
     return data;
 };

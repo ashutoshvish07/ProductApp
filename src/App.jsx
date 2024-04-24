@@ -15,37 +15,12 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
-  const [dialogInfo, SetDialogInfo] = useState({ component: null, title: '' })
-  const [dialogProps, setDialogProps] = useState({
-    open: false,
-    maxWidth: 'md',
-    onClose: () => setDialogProps({ ...dialogProps, open: false })
-  })
-
-
-  const addProduct = () =>{
-    console.log("add product");
-    SetDialogInfo({component: <ProductForm  dialogProps={dialogProps}/>, title: "Add Product" })
-    setDialogProps({ ...dialogProps, open: true })
-
-
-  }
 
   return (
     <QueryClientProvider client={queryClient}>
-              <ToastContainer />
+      <ToastContainer />
       <Container >
-        <Grid container justifyContent='space-between'>
-           <Grid item>
-             <Typography variant="h4" component="h1" gutterBottom>
-               Products
-             </Typography>
-           </Grid>
-           <Grid item>
-             <Button variant="outlined" onClick={addProduct}> Add Products </Button>
-           </Grid>
-        </Grid>
-         <DialogBox dialogProps={dialogProps} content={dialogInfo}/>
+
         <ProductList />
       </Container>
     </QueryClientProvider>
