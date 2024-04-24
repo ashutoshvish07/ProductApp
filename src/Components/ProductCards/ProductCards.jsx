@@ -88,15 +88,15 @@ const ProductCards = (props) => {
                 <Typography ref={ref} style={isExpanded ? null : paraStyle} className={classes.text_msg} variant="body2" color="text.secondary">
                     {data?.body}
                 </Typography>
+                {showButton && <Button size="small" className={classes.readbtn} onClick={toggleExpanded} >{isExpanded ? "read less" : "read more..."}</Button>}
                 <Box mt={2} display='flex' gap={1} justifyContent='flex-start' alignItems='center'>
                     <Typography className={classes.subtitle} variant="h5" component="div">
                         Price :
                     </Typography>
-                    <Typography ref={ref} style={isExpanded ? null : paraStyle} className={classes.text_msg} variant="body2" color="text.secondary">
+                    <Typography className={classes.text_msg} variant="body2" color="text.secondary">
                         {data?.reactions}
                     </Typography>
                 </Box>
-                {showButton && <Button size="small" className={classes.readbtn} onClick={toggleExpanded} >{isExpanded ? "read less" : "read more..."}</Button>}
             </CardContent>
         </Card>
 
